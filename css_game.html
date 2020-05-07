@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>quiz game</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">       
+        <style>
+            body{
+                background: url("kod.jpg") top center;
+                color:white;
+            }
+            h3,h5,#question{
+                text-align: center;
+            }
+            #opt1,#opt2,#opt3{
+                background: white;
+                color:black;
+                border-radius: 20px;
+                padding: 10px;
+                margin:10px 0px;
+            }
+            #quiz,#end{
+                margin:10%;
+                background:rgba(0,0,0,0.2);
+                padding: 10%;
+                border-radius: 20px;
+            }
+         button{
+                padding: 15px;
+                background: #149ddd;
+                color:white;
+                font-weight: bold;
+                font-size: 18px;
+                border: none;
+                border-radius: 20px;
+                width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+<script>   
+var myQuestions = [
+	{
+		question: "Which Club has won most of the champions League title?",
+		answers: {
+			a: 'Chelsea',
+			b: 'Real Madrid',
+			c: 'Barcelonia'
+		},
+		correctAnswer: 'Real Madrid'
+	},
+	{
+		question: " In which year was the European Cup rebranded as the Champions League?",
+		answers: {
+			a: '1990-91',
+			b: '1991-92',
+			c: '1992-93'
+		},
+		correctAnswer: '1992-93'
+	},
+	{
+		question: "Which Country has won the most world Cups?",
+		answers: {
+			a: 'Argentina',
+			b: 'Brazil',
+			c: 'Germany'
+		},
+		correctAnswer: 'Brazil'
+	},
+	{
+		question: "Who's the Champions League's top goalscorer of all time?",
+		answers: {
+			a: 'Cristiano Ronaldo',
+			b: 'Messi',
+			c: 'Kaka'
+		},
+		correctAnswer: 'Cristiano Ronaldo'
+	},
+	{
+		question: "Which country won the ever first world Cup in 1930?",
+		answers: {
+			a: 'Uruguay',
+			b: 'Brazil',
+			c: 'England'
+		},
+		correctAnswer: 'Uruguay'
+	}        
+];
+num=1
+index=0
+mark=0
+window.onload=function(){
+  document.getElementById('num').innerHTML = num;  
+  document.getElementById('question').innerHTML = myQuestions[0].question;
+  document.getElementById('opt1').innerHTML= myQuestions[index].answers.a;
+  document.getElementById('opt2').innerHTML= myQuestions[index].answers.b;
+  document.getElementById('opt3').innerHTML= myQuestions[index].answers.c;
+  document.getElementById('ans').innerHTML= myQuestions[index].correctAnswer;
+}
+function changeQuestion(){
+        el = document.getElementsByClassName("options") 
+        for(x=0;x<el.length;x++){
+            document.getElementsByClassName("options").item(x).style.background="#fff";
+            document.getElementsByClassName("options").item(x).style.color="#000";            
+        }
+        document.getElementById('outcome').innerHTML=""; 
+    num++;
+    index++
+    if(num<6 && index < myQuestions.length){
+        document.getElementById('num').innerHTML = num;
+        document.getElementById('question').innerHTML = myQuestions[index].question;
+        document.getElementById('opt1').innerHTML= myQuestions[index].answers.a;
+        document.getElementById('opt2').innerHTML= myQuestions[index].answers.b;
+        document.getElementById('opt3').innerHTML= myQuestions[index].answers.c;
+        document.getElementById('ans').innerHTML= myQuestions[index].correctAnswer;
+
+        
+    }else{
+       document.getElementById('quiz').style.display="none" 
+       document.getElementById('end').style.display="block" 
+       mark =document.getElementById('mark').innerHTML;
+       mark=mark * 10;
+       document.getElementById('finalScore').innerHTML=mark
+    }
+    
+}
+function choose(event){
+    option = event.target.innerHTML;
+    ans=document.getElementById('ans').innerHTML;
+    el = document.getElementsByClassName("options")
+    for(x=0;x<el.length;x++){
+       y= document.getElementsByClassName("options").item(x).innerHTML
+       if(ans==y){
+        document.getElementsByClassName("options").item(x).style.background="#00cc33";
+        document.getElementsByClassName("options").item(x).style.color="#fff";           
+       }else{
+        document.getElementsByClassName("options").item(x).style.background="#cc0000";
+        document.getElementsByClassName("options").item(x).style.color="#fff";           
+       }
+    }
+//    option = event.target.id;
+    ans=document.getElementById('ans').innerHTML;
+    choice=event.target.innerHTML
+    if(ans===choice){
+       document.getElementById('outcome').innerHTML="Correct"; 
+       mark++;
+       document.getElementById('mark').innerHTML=mark;
+    }else{
+        document.getElementById('outcome').innerHTML="Wrong"; 
+    }
+            
+//    option.innerHTML
+//    switch(option){
+//        case "opt1":
+//            
+//    }
+}
+
+</script> 
+
+        <div id="quiz" >
+                <h5>Score: <span id="mark">0</span>/5</h5>
+                <h3>Football Quiz</h3>
+                <h5>QUESTION <span id="num"></span> OF 5</h5>
+                <p id="question"></p>
+                <div id="opt1" class="options" onclick="choose(event)"></div>
+                <div id="opt2" class="options" onclick="choose(event)"></div>
+                <div id="opt3" class="options" onclick="choose(event)"></div>
+                <div id="ans" style="display:none"></div>
+                <button id="nextbtn" onclick="changeQuestion()">Next</button>
+                <h3 id="outcome"></h3>
+
+        </div>
+        <div id="end" style="background:;display:none">
+            <div style="color:white" id="box">
+                <a href="css_game.html">
+                <h1 style="text-align: center">GAME OVER</h1>
+                <h4 style="text-align: center">Total Score: <span id="finalScore"></span>/50</h4>
+            </div>    
+        </div>
+        <!--<button id="submit">Get Results</button>-->
+        
+    </body>
+</html>
+
